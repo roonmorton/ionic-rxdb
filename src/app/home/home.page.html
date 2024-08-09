@@ -1,0 +1,87 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Ejemplo RxDB</ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar placeholder="Buscar" show-clear-button="focus"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" color="light" class="ion-padding">
+
+
+
+  <ion-list *ngIf="users.length > 0" lines="none">
+    <ion-item *ngFor="let item of users" >
+      <ion-label>
+        <p><strong>ID:</strong> {{ item.id}}</p>
+        <p><strong>Full Name:</strong> {{item.firstName}} {{item.lastName}}</p>
+        <p><strong>Username:</strong> {{item.username}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <div *ngIf="users.length <= 0">
+    <p>No se encontro ningun registro</p>
+  </div>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button id="add-user-modal" expand="block">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+    <!--<ion-fab-list side="top">
+      <ion-fab-button>
+        <ion-icon name="document"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button>
+        <ion-icon name="color-palette"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button>
+        <ion-icon name="globe"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>-->
+  </ion-fab>
+
+
+  <ion-modal [keepContentsMounted]="true" trigger="add-user-modal" #modal>
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="modal.dismiss()">Cancel</ion-button>
+          </ion-buttons>
+          <ion-title>Add User</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding" color="light">
+
+        <form [formGroup]="formUser" (ngSubmit)="saveUser(modal)">
+          <ion-list [inset]="true" mode="ios" style="margin: 16px 0px;">
+            <ion-item>
+              <ion-item>
+                <ion-input label="First Name:" type="text" inputmode="text" placeholder="" maxlength="75"
+                  formControlName="firstName"></ion-input>
+              </ion-item>
+            </ion-item>
+
+            <ion-item>
+              <ion-item>
+                <ion-input label="Last Name:" type="text" inputmode="text" placeholder="" maxlength="75"
+                  formControlName="lastName"></ion-input>
+              </ion-item>
+            </ion-item>
+
+            <ion-item>
+              <ion-item>
+                <ion-input label="Username:" type="text" inputmode="text" placeholder="" maxlength="25"
+                  formControlName="username"></ion-input>
+              </ion-item>
+            </ion-item>
+          </ion-list>
+          <ion-button expand="block" type="submit" [disabled]="!formUser.valid">save</ion-button>
+        </form>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+</ion-content>
