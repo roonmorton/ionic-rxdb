@@ -40,7 +40,7 @@ export class HomePage implements OnInit, OnDestroy {
     this.formUser = this.fb.group({
       id: new FormControl(null),
       firstName: new FormControl(null, [Validators.required]),
-      lastName: new FormControl(null, [Validators.required]),
+      lastName: new FormControl(null, []),
       username: new FormControl(null, [Validators.required])
     })
     this.getUsers()
