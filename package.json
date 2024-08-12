@@ -26,6 +26,7 @@
     "@capacitor/haptics": "6.0.1",
     "@capacitor/keyboard": "6.0.2",
     "@capacitor/status-bar": "6.0.1",
+    "@capacitor/toast": "^6.0.2",
     "@ionic/angular": "^8.0.0",
     "@types/uuid": "^10.0.0",
     "angular-uuid": "^0.0.4",

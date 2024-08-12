@@ -5,6 +5,9 @@ import { environment } from 'src/environments/environment.prod';
 import { createRxDatabase } from 'rxdb';
 import { getRxStorageDexie } from 'rxdb/plugins/storage-dexie';
 import { databasesConfig } from '../../schemas/MyDataBaseSchema';
+import { RxDBQueryBuilderPlugin } from 'rxdb/plugins/query-builder';
+import { RxDBUpdatePlugin } from 'rxdb/plugins/update';
+
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +25,9 @@ export class DatabaseService {
 
   async initialize() {
     try {
+      addRxPlugin(RxDBQueryBuilderPlugin);
+      addRxPlugin(RxDBUpdatePlugin);
+      
       if (!environment.production)
         addRxPlugin(RxDBDevModePlugin)
 

@@ -1,9 +1,9 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Ejemplo RxDB</ion-title>
+    <ion-title>Example RxDB</ion-title>
   </ion-toolbar>
   <ion-toolbar>
-    <ion-searchbar placeholder="Buscar" show-clear-button="focus"></ion-searchbar>
+    <ion-searchbar #searchInput  placeholder="Search by username" show-clear-button="focus" (ionInput)="search(searchInput.value)" debounce="300"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
@@ -11,13 +11,19 @@
 
 
 
-  <ion-list *ngIf="users.length > 0" lines="none">
+  <ion-list *ngIf="users.length > 0" lines="inset" [inset]="true" style="margin: 0;">
     <ion-item *ngFor="let item of users" >
       <ion-label>
         <p><strong>ID:</strong> {{ item.id}}</p>
         <p><strong>Full Name:</strong> {{item.firstName}} {{item.lastName}}</p>
         <p><strong>Username:</strong> {{item.username}}</p>
       </ion-label>
+      <ion-button slot="end" size="default" color="primary" (click)="update(item, modalAddUser)">
+        <ion-icon slot="icon-only" name="create"></ion-icon>
+      </ion-button>
+      <ion-button slot="end" size="default" color="danger" (click)="delete(item)">
+        <ion-icon slot="icon-only" name="trash"></ion-icon>
+      </ion-button>
     </ion-item>
   </ion-list>
 
@@ -43,19 +49,19 @@
   </ion-fab>
 
 
-  <ion-modal [keepContentsMounted]="true" trigger="add-user-modal" #modal>
+  <ion-modal [keepContentsMounted]="true" trigger="add-user-modal" #modalAddUser>
     <ng-template>
       <ion-header>
         <ion-toolbar>
           <ion-buttons slot="start">
-            <ion-button (click)="modal.dismiss()">Cancel</ion-button>
+            <ion-button (click)="modalAddUser.dismiss(); formUser.reset()">Cancel</ion-button>
           </ion-buttons>
           <ion-title>Add User</ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-content class="ion-padding" color="light">
 
-        <form [formGroup]="formUser" (ngSubmit)="saveUser(modal)">
+        <form [formGroup]="formUser" (ngSubmit)="saveUser(modalAddUser)">
           <ion-list [inset]="true" mode="ios" style="margin: 16px 0px;">
             <ion-item>
               <ion-item>
