@@ -12,7 +12,7 @@ Este es un ejemplo basico de la integración de RxDB con Ionic Angular
 `git clone https://github.com/roonmorton/ionic-rxdb.git`\
 `cd ionic-rxdb`\
 `npm install`\
-`ionic serve --port=8200`\
+`ionic serve --port=8200`
 
 Abrir navegador `http://localhost:8200`
 
